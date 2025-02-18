@@ -13,7 +13,9 @@ const usePlatforms = () =>
   useQuery({
     queryKey: ["platforms"],
     queryFn: () =>
-      apiClient.get<FetchResponse<Platform>>("/genres").then((res) => res.data),
+      apiClient
+        .get<FetchResponse<Platform>>("/platforms/lists/parents")
+        .then((res) => res.data), // Corrected endpoint
     staleTime: 24 * 60 * 60 * 1000,
     initialData: { count: platforms.length, results: platforms },
   });
