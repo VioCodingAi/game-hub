@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { GameQuery } from "../App";
 import { Platform } from "./usePlatforms";
-import APIClient from "../services/api-client";
+import APIClient, { FetchResponse } from "../services/api-client";
 
 export interface Game {
   id: number;
@@ -15,7 +15,7 @@ export interface Game {
 const apiClient = new APIClient<Game>("/games");
 
 const useGames = (gameQuery: GameQuery) =>
-  useQuery({
+  useQuery<FetchResponse<Game>>({
     queryKey: ["games", gameQuery],
     queryFn: () =>
       apiClient.getAll({
